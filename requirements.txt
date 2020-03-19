@@ -1,0 +1,9 @@
+numpy
+fastai
+Flask
+matplotlib
+numpy
+pandas
+Pillow
+plotly
+gunicorn
