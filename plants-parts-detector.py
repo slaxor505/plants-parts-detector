@@ -244,12 +244,12 @@ def FUN_upload_image():
 # Start the service
 ################################################
 if __name__ == "__main__":
-    if sys.argv[1] == "production":
-        enableDebug=False
-    else:
-        enableDebug=True
-        
-    print(sys.argv[1])
-    app.run(host='0.0.0.0', port=5000, debug=enableDebug)
+    enableDebug=True
+    
+    try:
+        if sys.argv[1] == "production":
+            enableDebug=False
+    finally:
+        app.run(host='0.0.0.0', port=5000, debug=enableDebug)
     
     
