@@ -8,6 +8,7 @@ import numpy as np
 from collections import namedtuple
 import  hashlib
 import datetime
+import sys
 
 #from PIL import *
 from PIL import Image as PILImage
@@ -243,4 +244,12 @@ def FUN_upload_image():
 # Start the service
 ################################################
 if __name__ == "__main__":
-    app.run(debug=True)
+    if sys.argv[1] == "production":
+        enableDebug=False
+    else:
+        enableDebug=True
+        
+    print(sys.argv[1])
+    app.run(host='0.0.0.0', port=5000, debug=enableDebug)
+    
+    
