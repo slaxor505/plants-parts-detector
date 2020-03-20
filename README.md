@@ -4,7 +4,7 @@ This app detects part of plants from photos using a Convolutional Neural Net (CN
 ## Version 0.11
 A simple 5-Class ResNet-50 classifier.
 
-Usage:
+# Usage:
 
 ## Command line
 
