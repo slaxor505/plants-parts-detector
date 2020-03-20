@@ -6,11 +6,15 @@ A simple 5-Class ResNet-50 classifier.
 
 Usage:
 
-##Command line
+## Command line
 
-  python ./plants-parts-detector.py
+  python ./plants-parts-detector.py 
+  
+You can use parameter 'production' to disable debug, e.g.  
 
-##Docker
+  python ./plants-parts-detector.py production
+
+## Docker
 The app can be run in Docker container.
 
 Steps:
@@ -22,5 +26,5 @@ Steps:
 
 3. Run container:
 
-  docker run --name ppd -it --publish 5001:5000 plants-parts-detector:0.11
+  docker run --name ppd -it --publish 5001:5000 plants-parts-detector
   
