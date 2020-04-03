@@ -23,5 +23,11 @@ EXPOSE 5000
 # Using production WSGI server 'gunicorn plants-parts-detector:app --workers=4 -b 0.0.0.0:5000'
 CMD [ "gunicorn", "plants-parts-detector:app", "--workers=1", "-b", "0.0.0.0:5000" ]
 
+
+#to build
+#docker build -t plant-detector:latest .
+
 #to run container
-#docker run --name ppd -it --detach --publish 5001:5000 --restart=always -m 512m plants-parts-detector:0.11 gunicorn plants-parts-detector:app --workers=1 -b 0.0.0.0:5000
+#docker run --name ppd -it --detach --publish 5001:5000 --restart=always -m 512m plants-parts-detector:latest gunicorn plants-parts-detector:app --workers=1 -b 0.0.0.0:5000
+#with volume
+#docker run --name ppd -it --detach --publish 5001:5000 --restart=always -m 512m --mount type=bind,source=ppd_img_pool.docker,target=/app/static/img_pool plants-parts-detector gunicorn plants-parts-detector:app --workers=1 -b 0.0.0.0:5000
