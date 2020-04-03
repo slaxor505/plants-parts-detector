@@ -7,4 +7,8 @@ https://github.com/cwerner/guitars-app/blob/master/requirements.txt
 https://pythonspot.com/flask-hello-world/
 https://www.starlette.io/templates/
 https://www.pyimagesearch.com/
+https://stackoverflow.com/questions/48176531/python-pil-image-verify-returns-none
+https://2.python-requests.org/en/master/user/quickstart/#binary-response-content
+https://bulma.io/documentation/
+
 

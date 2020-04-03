@@ -47,22 +47,22 @@ def allowed_file(filename):
 
 @app.errorhandler(404)
 def FUN_404(error):
-    return render_template("error.html"), 404
+    return render_template("error.jinja2"), 404
 
 
 @app.errorhandler(405)
 def FUN_405(error):
-    return render_template("error.html"), 405
+    return render_template("error.jinja2"), 405
 
 
 @app.errorhandler(413)
 def FUN_413(error):
-    return render_template("error.html"), 413
+    return render_template("error.jinja2"), 413
 
 
 @app.errorhandler(500)
 def FUN_500(error):
-    return render_template("error.html"), 500
+    return render_template("error.jinja2"), 500
 
 
 ################################################
@@ -296,7 +296,7 @@ def FUN_fetch_image():
                                    labels=labels)
         except Exception:
             print('Error fetching of saving image from '+url)
-            return render_template("error.html"), 500
+            return render_template("error.jinja2"), 500
 
     return (redirect(url_for("FUN_root")))
 
