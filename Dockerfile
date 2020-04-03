@@ -2,7 +2,6 @@ FROM python:3.7-buster
 
 #MAINTAINER Slava Pisarevskiy "slava@plantbook.io"
 
-
 #preinstalling CPU only pytorch to reduce image footprint as we don't use GPU here
 RUN apt-get update -y && \
     apt-get install -y python-pip python-dev && \
@@ -17,10 +16,11 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
+# to run as Flask app
 #ENTRYPOINT [ "python" ]
 #CMD [ "plants-parts-detector.py","production" ]
-#'gunicorn plants-parts-detector:app --workers=4 -b 0.0.0.0:5000'
 
+# Using production WSGI server 'gunicorn plants-parts-detector:app --workers=4 -b 0.0.0.0:5000'
 CMD [ "gunicorn", "plants-parts-detector:app", "--workers=1", "-b", "0.0.0.0:5000" ]
 
 #to run container

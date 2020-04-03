@@ -1,63 +1,206 @@
 {% extends "layout.jinja2" %}
 {% block body %}
 
-<section class="section">
-  <div class="container">
-    <div class="file has-name">
-      <form method=post action="/upload_image" enctype=multipart/form-data> <label class="file-label">
-        <input class="file-input" type="file" name="file">
-        <span class="file-cta">
-          <span class="file-icon">
-            <i class="fas fa-upload"></i>
-          </span>
-          <span class="file-label">
-            Choose a file…
-          </span>
-        </span>
+    <!--suppress ALL -->
+    <section class="section">
+        <div class="container">
+            <div class="file has-name">
 
-        <div class="control">
-          <button class="button is-primary">Upload</button>
+                <form method=post action="/upload_image" enctype=multipart/form-data>
+                    <label class="file-label">
+                        <input class="file-input" type="file" name="file">
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                              Choose a file…
+                            </span>
+                        </span>
+
+                        <div class="control">
+                            <button class="button is-primary">Upload</button>
+                        </div>
+                    </label>
+                </form>
+            </div>
         </div>
-        </label>
-      </form>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-
-    <div class="tile is-ancestor">
-      <div class="tile is-vertical">
-        <div class="tile">
-          <div class="tile is-parent is-vertical">
-            <article class="tile is-child box">
-                <h2 class="title">Source:</h2>
-                <figure class="image">
-                  {% if img_src %}
-                    <img src="{{img_src}}" class="img-rounded">
-                  {% else %}
-                    <img src="{{url_for('static', filename='img/les_paul.jpg')}}" width=400 height=400 class="img-rounded">
-                  {% endif %}
-                </figure>
-            </article>
-          </div>
-          <div class="tile is-parent">
-            <article class="tile is-child box">
-                {% if prediction_result %}
-                <h2 class="title">Prediction: {% if prediction_winner %}{{prediction_winner}}{% endif %}</h2>
-                <div id="graph-0"></div>
-                {% else %}
-                <h2 class="title">Prediction: Foo plant</h2>
-                <img src="{{url_for('static', filename='img/les_paul_predict.png')}}" width=400 class="img-rounded">
-                {% endif %}
-
-            </article>
-          </div>
+        <br>
+        <div class="container">
+            <div class="file has-name">
+                <form method=get action="/fetch_image">
+                    <label class="file-label">
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" type="url" name="url" placeholder="Paste URL">
+                            <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        </div>
+                        <div class="control">
+                            {#                        <input type="submit" value="Fetch and analyze image">#}
+                            <button class="button is-primary">Fetch</button>
+                        </div>
+                    </label>
+                </form>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+
+    <section class="section">
+        <div class="container">
+
+            <div class="tile is-ancestor">
+                <div class="tile is-vertical">
+                    <div class="tile">
+                        <div class="tile is-parent is-vertical">
+                            <article class="tile is-child box">
+                                <h2 class="title">Source:</h2>
+                                <figure class="image">
+                                    {% if img_src %}
+                                        <img src="{{ img_src }}" class="img-rounded">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='img/flower_sample.jpg') }}" width=400
+                                             height=400 class="img-rounded">
+                                    {% endif %}
+                                </figure>
+                            </article>
+                        </div>
+
+                        <div class="tile is-parent is-vertical">
+                            <article class="tile is-child box">
+
+
+                                <h2 class="title">On picture detected:</h2>
+
+                                <div class="content">
+                                    {% if prediction_winner %}
+                                        {% for item in prediction_winner %}
+
+                                            <ul type="1">
+                                                <li>{{ item }}</li>
+                                            </ul>
+
+
+                                            {#                                        <div class="field is-horizontal">#}
+                                            {#                                            <label class="subtitle">{{ item }}</label>#}
+                                            {#                                        </div>#}
+
+                                        {% endfor %}
+
+                                        {#                                    <div id="graph-0"></div>#}
+
+                                    {% else %}
+
+                                        <ul type="1">
+                                            <li>flower</li>
+                                            <li>leaf</li>
+                                            <li>stem</li>
+                                        </ul>
+                                        {#                                    <h2 class="title">Prediction: Foo plant</h2>#}
+                                    {% endif %}
+
+                                </div>
+                            </article>
+
+                            {#Form#}
+                            {% if prediction_winner %}
+                                <article class="tile is-child box">
+                                    <form method=post action="/submit_feedback">
+
+
+                                        <h2 class="label">Please leave feedback to make detector be more accurate:</h2>
+
+                                        <div class="field is-horizontal">
+
+                                            <div class="field-label">
+                                                <label class="field">Is detection correct?</label>
+                                            </div>
+
+                                            <div class="field-body">
+                                                <div class="field is-narrow">
+                                                    <div class="control">
+                                                        <label class="radio">
+                                                            <input type="radio" name="correct" value="yes">
+                                                            Yes
+                                                        </label>
+                                                        <label class="radio">
+                                                            <input type="radio" name="correct" value="no">
+                                                            No
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="field is-horizontal">
+
+                                            <label class="label">What's on the picture?</label>
+
+                                        </div>
+
+                                        {% for item in labels %}
+
+                                            <div class="field is-horizontal">
+
+                                                <div class="field-label">
+                                                    <label class="field">{{ item }}</label>
+                                                </div>
+
+                                                <div class="field-body">
+                                                    <div class="field is-narrow">
+                                                        <div class="control">
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" name={{ item }}>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        {% endfor %}
+
+
+
+                                        <div class="field is-grouped">
+                                            <div class="control">
+                                                <input type="hidden" value={{ img_src }} name="img_src"/>
+
+                                                <button class="button is-link">Submit</button>
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+
+                                </article>
+                            {% endif %}
+                        </div>
+
+
+                    </div>
+                    <div class="tile is-parent is-centered">
+                        <article class="tile is-child box">
+
+                            <h2 class="label">Detection details:</h2>
+                            {% if prediction_result %}
+                                <div id="graph-0"></div>
+                            {% else %}
+
+                                <img src="{{ url_for('static', filename='img/flower_predict.png') }}" width=400
+                                     class="img-rounded">
+                            {% endif %}
+
+                        </article>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+    </section>
 
 {% endblock %}
+

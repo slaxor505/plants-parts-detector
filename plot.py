@@ -7,24 +7,22 @@ import plotly.graph_objs as go
 
 
 def prediction_barchart(result, class_labels, class_dict=None):
-
     LIMIT = 7
     # data is list of name, value pairs
     y_values, x_values = map(list, zip(*result))
     # Create the Plotly Data Structure
 
-    x_values = [x  if x < 0 else x for x in x_values][:LIMIT]
+    x_values = [x if x < 0 else x for x in x_values][:LIMIT]
     if class_dict:
         y_values = [class_dict[y] for y in y_values]
     y_values = y_values[:LIMIT]
     # classify based on prob.
-    labels = ['Hm?', 'Maybe', 'Probably', 'Trust me']
-    cols   = ['red', 'orange', 'lightgreen', 'darkgreen']
+    labels = ['Hm?', 'Not likely', 'Probably', 'Trust me']
+    cols = ['red', 'orange', 'lightgreen', 'darkgreen']
 
     colors = dict(zip(labels, cols))
-  
-    
-    bins = [-0.001, 10, 25, 75, 100.001]
+
+    bins = [-0.001, 10, 25, 50, 100.001]
 
     # Build dataframe
     df = pd.DataFrame({'y': y_values,
@@ -43,11 +41,11 @@ def prediction_barchart(result, class_labels, class_dict=None):
         data=bars,
         layout=dict(
 
-            #title='Bar Plot',
+            # title='Bar Plot',
             xaxis=dict(
                 title="Probability",
                 range=[0, 100]
-                ),
+            ),
 
             hovermode='y',
             showlegend=True,
@@ -61,4 +59,3 @@ def prediction_barchart(result, class_labels, class_dict=None):
 
     # Convert the figures to JSON
     return json.dumps(graph, cls=plotly.utils.PlotlyJSONEncoder)
-
