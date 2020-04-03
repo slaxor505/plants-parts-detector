@@ -3,5 +3,5 @@ __pycache__
 .DS_Store
 .ipynb_checkpoints/
 .vscode/
-/requirements.txt.bak
-/static/img_pool/
+static/img_pool/
+.idea
