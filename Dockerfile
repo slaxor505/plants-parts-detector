@@ -25,7 +25,7 @@ CMD [ "gunicorn", "plants-parts-detector:app", "--workers=1", "-b", "0.0.0.0:500
 
 
 #to build
-#docker build -t plant-detector:latest .
+#docker build -t plants-parts-detector:latest .
 
 #to run container
 #docker run --name ppd -it --detach --publish 5001:5000 --restart=always -m 512m plants-parts-detector:latest gunicorn plants-parts-detector:app --workers=1 -b 0.0.0.0:5000
