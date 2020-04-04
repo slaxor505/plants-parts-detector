@@ -256,6 +256,10 @@ def FUN_upload_image():
                                    prediction_winner=prediction_winner,
                                    graphJSON=plotly_json,
                                    labels=labels)
+        else:
+            return render_template("error.jinja2")
+
+
     return (redirect(url_for("FUN_root")))
 
 
@@ -303,7 +307,7 @@ def FUN_fetch_image():
 
 @app.route("/submit_feedback", methods=['POST'])
 def FUN_submit_feedback():
-    if request.form.get('correct') == 'no':
+    if request.form.get('correct'):
 
         filename = request.form['img_src']
         # filename = os.path.join("static/img_pool", request.form['img_src'])
@@ -313,9 +317,13 @@ def FUN_submit_feedback():
 
         selection = ""
 
-        for x in request.form:
-            if (x != 'img_src') and (x != 'correct'):
-                selection = selection + (x + " ")
+        if request.form.get('correct') == "no":
+
+            for x in request.form:
+                if (x != 'img_src') and (x != 'correct'):
+                    selection = selection + (x + " ")
+        else:
+            selection=" "
 
         feedback_file.write(f'{selection}')
         feedback_file.close()

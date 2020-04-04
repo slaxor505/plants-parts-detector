@@ -8,7 +8,7 @@
 
                 <form method=post action="/upload_image" enctype=multipart/form-data>
                     <label class="file-label">
-                        <input class="file-input" type="file" name="file">
+                        <input class="file-input" type="file" name="file" onchange="form.submit()">
                         <span class="file-cta">
                             <span class="file-icon">
                                 <i class="fas fa-upload"></i>
@@ -18,9 +18,9 @@
                             </span>
                         </span>
 
-                        <div class="control">
-                            <button class="button is-primary">Upload</button>
-                        </div>
+{#                        <div class="control">#}
+{#                            <button class="button is-primary">Upload</button>#}
+{#                        </div>#}
                     </label>
                 </form>
             </div>
@@ -83,11 +83,6 @@
                                                 <li>{{ item }}</li>
                                             </ul>
 
-
-                                            {#                                        <div class="field is-horizontal">#}
-                                            {#                                            <label class="subtitle">{{ item }}</label>#}
-                                            {#                                        </div>#}
-
                                         {% endfor %}
 
                                         {#                                    <div id="graph-0"></div>#}
@@ -99,7 +94,7 @@
                                             <li>leaf</li>
                                             <li>stem</li>
                                         </ul>
-                                        {#                                    <h2 class="title">Prediction: Foo plant</h2>#}
+
                                     {% endif %}
 
                                 </div>
@@ -121,7 +116,7 @@
 
                                             <div class="field-body">
                                                 <div class="field is-narrow">
-                                                    <div class="control">
+                                                    <div class="control" onchange="document.getElementById('submit-button').disabled = false">
                                                         <label class="radio">
                                                             <input type="radio" name="correct" value="yes">
                                                             Yes
@@ -138,7 +133,7 @@
 
                                         <div class="field is-horizontal">
 
-                                            <label class="label">What's on the picture?</label>
+                                            <label class="label">What's actually on the picture?</label>
 
                                         </div>
 
@@ -170,7 +165,7 @@
                                             <div class="control">
                                                 <input type="hidden" value={{ img_src }} name="img_src"/>
 
-                                                <button class="button is-link">Submit</button>
+                                                <button class="button is-link" disabled id="submit-button">Submit</button>
                                             </div>
                                         </div>
 
