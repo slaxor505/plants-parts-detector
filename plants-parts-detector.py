@@ -3,29 +3,29 @@
 
 from flask import Flask, request, render_template, redirect, url_for
 from werkzeug.utils import secure_filename
-import os
-import numpy as np
-from collections import namedtuple
-import hashlib
+#import os
+#import numpy as np
+#from collections import namedtuple
+#import hashlib
 import datetime
-import sys
+#import sys
 
 # from PIL import *
 from PIL import Image as PILImage
 import matplotlib
 from fastai.tabular import learner
-from pip._vendor.pyparsing import line
+#from pip._vendor.pyparsing import line
 
 matplotlib.use('Agg')
 
 # fastai
-from fastai import *
+#from fastai import *
 from fastai.vision import *
 import torch
 from pathlib import Path
 
-import pandas as pd
-import numpy as np
+#import pandas as pd
+#import numpy as np
 
 from plot import prediction_barchart
 
