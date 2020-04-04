@@ -332,7 +332,8 @@ def FUN_submit_feedback():
 
     # if request.form['correct'] == 'on':
 
-    return (redirect(url_for("FUN_root")))
+    #return (redirect(url_for("FUN_root")))
+    return render_template("thankyou.jinja2")
 
 
 ################################################

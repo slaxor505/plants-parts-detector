@@ -22,7 +22,7 @@ def prediction_barchart(result, class_labels, class_dict=None):
 
     colors = dict(zip(labels, cols))
 
-    bins = [-0.001, 10, 25, 50, 100.001]
+    bins = [-0.001, 10, 50, 75, 100.001]
 
     # Build dataframe
     df = pd.DataFrame({'y': y_values,

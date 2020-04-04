@@ -11,4 +11,9 @@ https://stackoverflow.com/questions/48176531/python-pil-image-verify-returns-non
 https://2.python-requests.org/en/master/user/quickstart/#binary-response-content
 https://bulma.io/documentation/
 
+https://www.w3schools.com/tags/att_button_disabled.asp
+https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled
+https://stackoverflow.com/questions/11719961/javascript-remove-disabled-attribute-from-html-input
+https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
+
 

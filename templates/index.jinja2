@@ -18,17 +18,17 @@
                             </span>
                         </span>
 
-{#                        <div class="control">#}
-{#                            <button class="button is-primary">Upload</button>#}
-{#                        </div>#}
+                        {#                        <div class="control">#}
+                        {#                            <button class="button is-primary">Upload</button>#}
+                        {#                        </div>#}
                     </label>
                 </form>
             </div>
         </div>
         <br>
-{#        <div class="container">#}
-{#        <h2 class="title">or</h2>#}
-{#        </div>#}
+        {#        <div class="container">#}
+        {#        <h2 class="title">or</h2>#}
+        {#        </div>#}
         <div class="container">
             <div class="file has-name">
                 <form method=get action="/fetch_image">
@@ -89,19 +89,28 @@
 
                                     {% else %}
 
-                                        <ul type="1">
-                                            <li>flower</li>
-                                            <li>leaf</li>
-                                            <li>stem</li>
-                                        </ul>
+                                        {% if prediction_result %}
 
+                                            <ul type="1">
+                                                Nothing which resembles plant parts we are aware of
+                                            </ul>
+
+                                        {% else %}
+
+                                            <ul type="1">
+                                                <li>flower</li>
+                                                <li>leaf</li>
+                                                <li>stem</li>
+                                            </ul>
+
+                                        {% endif %}
                                     {% endif %}
 
                                 </div>
                             </article>
 
                             {#Form#}
-                            {% if prediction_winner %}
+                            {% if prediction_result %}
                                 <article class="tile is-child box">
                                     <form method=post action="/submit_feedback">
 
@@ -116,7 +125,8 @@
 
                                             <div class="field-body">
                                                 <div class="field is-narrow">
-                                                    <div class="control" onchange="document.getElementById('submit-button').disabled = false">
+                                                    <div class="control"
+                                                         onchange="document.getElementById('submit-button').disabled = false">
                                                         <label class="radio">
                                                             <input type="radio" name="correct" value="yes">
                                                             Yes
@@ -165,7 +175,8 @@
                                             <div class="control">
                                                 <input type="hidden" value={{ img_src }} name="img_src"/>
 
-                                                <button class="button is-link" disabled id="submit-button">Submit</button>
+                                                <button class="button is-link" disabled id="submit-button">Submit
+                                                </button>
                                             </div>
                                         </div>
 
